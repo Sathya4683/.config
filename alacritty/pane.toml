@@ -1,0 +1,11 @@
+# Used by the About.desktop, Activity.desktop, Docker.desktop, Omakub.desktop, and Neovim.desktop apps
+import = [ "~/.config/alacritty/theme.toml", "~/.config/alacritty/font.toml", "~/.config/alacritty/font-size.toml", "~/.config/alacritty/shared.toml" ]
+
+[window]
+padding.x = 30
+padding.y = 30
+
+[scrolling]
+history = 10000    # number of lines to keep in scrollback
+multiplier = 3     # how fast scrolling happens
+
