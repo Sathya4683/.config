@@ -1,5 +1,4 @@
 
-```markdown
 # Workflow Stack
 
 | Tool / Setup | Purpose |
@@ -10,4 +9,3 @@
 | tmux + tmux-sessionizer (tms) | Project-scoped terminal sessions to avoid terminal sprawl and preserve context. |
 | Zathura | Lightweight keyboard-driven PDF viewer for focused documentation reading. |
 | Omakub | Opinionated Ubuntu baseline providing a streamlined development environment foundation. |
-```
