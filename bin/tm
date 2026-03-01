@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+CATEGORIES=(
+    "WORKFLOW"
+    "PROGRAMMING"
+    "WASTED"
+    "STOP"
+)
+
+selected=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --margin 10%)
+
+[[ -z "$selected" ]] && exit 0
+
+if [[ "$selected" == "STOP" ]]; then
+    timew stop
+    tmux set-option -g @active_category ""
+else
+    timew start "$selected"
+    tmux set-option -g @active_category "$selected"
+fi
