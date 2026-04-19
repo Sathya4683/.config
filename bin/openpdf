@@ -9,10 +9,10 @@ DIRS=(
 if [[ $# -eq 1 ]]; then
     selected="$1"
 else
-    selected=$(rg --files "${DIRS[@]}" \
-        | grep -Ei '\.(pdf|epub|djvu)$' \
-        | sed "s|^$HOME/||" \
-        | fzf --margin=10%)
+    selected=$(rg --files "${DIRS[@]}" |
+        grep -Ei '\.(pdf|epub|djvu)$' |
+        sed "s|^$HOME/||" |
+        fzf --margin=10%)
 
     [[ $selected ]] && selected="$HOME/$selected"
 fi
@@ -21,4 +21,8 @@ fi
 [[ -z "$selected" ]] && exit 0
 
 # Open in new tmux window
-tmux new-window -d zathura "$selected"
+if tmux info &>/dev/null; then
+    tmux new-window -d zathura "$selected"
+else
+    tmux new-session -d -s default zathura "$selected"
+fi
