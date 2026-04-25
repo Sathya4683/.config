@@ -1,0 +1,33 @@
+add_newline = false
+
+format = """
+$directory$git_branch$git_status$nodejs$python$cmd_duration
+$character
+"""
+
+[directory]
+style = "blue"
+truncation_length = 3
+
+[git_branch]
+symbol = " "
+style = "purple"
+
+[git_status]
+style = "red"
+
+[nodejs]
+symbol = "⬢ "
+style = "green"
+
+[python]
+symbol = "🐍 "
+style = "yellow"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration](bold yellow)"
+
+[character]
+success_symbol = "[➜](green)"
+error_symbol = "[✗](red)"

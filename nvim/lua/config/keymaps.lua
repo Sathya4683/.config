@@ -44,7 +44,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set({ "n", "i" }, "<leader>w", "<cmd>w<CR>", { silent = true })
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { silent = true })
 vim.keymap.set("n", "<leader>q", "<cmd>close<CR>", { silent = true })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { silent = true })
 

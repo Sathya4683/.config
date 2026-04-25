@@ -1,4 +1,2 @@
 import = [ "~/.config/alacritty/themes/themes/alacritty_0_12.toml", "~/.config/alacritty/font.toml", "~/.config/alacritty/font-size.toml", "~/.config/alacritty/shared.toml" ]
 
-
-

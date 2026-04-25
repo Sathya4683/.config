@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DIRS=(
     "$HOME/Documents"
     "$HOME/Downloads"
 )
+
+SESSION="pdfs"
 
 # If file passed as argument, use it directly
 if [[ $# -eq 1 ]]; then
@@ -20,9 +22,25 @@ fi
 # Exit if nothing selected
 [[ -z "$selected" ]] && exit 0
 
-# Open in new tmux window
-if tmux info &>/dev/null; then
-    tmux new-window -d zathura "$selected"
-else
-    tmux new-session -d -s default zathura "$selected"
+# --- Extract a readable title ---
+name=$(basename "$selected")
+
+# Try smarter naming for PDFs
+if [[ "$selected" =~ \.pdf$ ]]; then
+    if command -v pdftotext >/dev/null; then
+        title=$(pdftotext "$selected" - | head -n 1 | tr -d '\r')
+        [[ -n "$title" ]] && name="$title"
+    fi
 fi
+
+# Fallback: shorten filename
+name=$(echo "$name" | cut -c1-40)
+
+# --- Ensure session exists ---
+if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux new-session -d -s "$SESSION" -n "$name" zathura "$selected"
+    exit 0
+fi
+
+# --- Create new window (like prefix+c) ---
+tmux new-window -t "$SESSION" -n "$name" zathura "$selected"
