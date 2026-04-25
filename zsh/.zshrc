@@ -40,7 +40,6 @@ alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias ff="fzf --preview 'batcat --style=numbers --color=always {}' --height=80%"
 alias fd='fdfind'
-alias cd='z'   # zoxide override
 
 f() {
   local file
@@ -55,6 +54,7 @@ rf() {
 kp() {
   ps aux | fzf | awk '{print $2}' | xargs kill -9
 }
+
 
 # ---------- Directories ----------
 alias ..='cd ..'
@@ -132,6 +132,11 @@ if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
+
+gr() {
+  cd "$(git rev-parse --show-toplevel 2>/dev/null)" || echo "Not a repo"
+}
+
 # fzf (Zsh version)
 if command -v fzf >/dev/null 2>&1; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -164,3 +169,4 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # ---------- Prompt ----------
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
